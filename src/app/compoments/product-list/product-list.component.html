@@ -4,6 +4,7 @@
 
 <div class="container-fluid text-center">
     <table class="table table-striped text-black-50 container" *ngIf="status">
+       <thead>
         <tr>
             <th>Id</th>
             <th>Tên Sản Phẩm</th>
@@ -11,13 +12,14 @@
             <th>Ảnh</th>
             <th colspan="2">Action</th>
         </tr>
-        <tr  *ngFor="let item of products;index as i" class="my-3" >
-            <td>{{ i+ 1}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
-            <td><img src="{{item.image}}" width="100" alt=""></td>
-            <td class="m-5 btn btn-success"><a class="">Sửa</a></td>
-            <td class=" btn btn-danger"><button (click)="remove(item._id)">Xóa</button></td>
+       </thead>
+        <tbody>
+            <tr  app-product-item
+        *ngFor="let product of products; let i = index"
+        [product]="product"
+        [index]="i"
+        (onRemove)="removeItem($event)"class="my-3" >
         </tr>
+        </tbody>
     </table>
 </div>
